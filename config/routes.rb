@@ -3,12 +3,14 @@ Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
 
+
   concern :favoritable do |options|
     shallow do
       post '/favorite', { to: "favorites#create", on: :member }.merge(options)
-      delete '/favorite', { to: "favorites#destroy", on: :member }.merge(options)
+      delete '/favorite',  { to: "favorites#destroy", on: :member }.merge(options)
     end
-  end
+  end 
+
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -23,12 +25,7 @@ Rails.application.routes.draw do
       resources :songs, only: [] do
         concerns :favoritable, favoritable_type: 'Song'
       end
-      resources :album, only: [] do
-        concerns :favoritable, favoritable_type: 'Album'
-      end
-      resources :artist, only: [] do
-        concerns :favoritable, favoritable_type: 'Artist'
-      end
     end
   end
+  get "*path", to: "home#index", :constraints => lambda{|req| req.path !~ /\.(png|jpg|js|css|json)$/ }
 end
