@@ -1,3 +1,3 @@
 # SpotCode
 
-Evento do OneBitCode onde foi criado um clone do Spotify utilizando Ruby in Rails e React para a construção da aplicação.
+O projeto "SpotCode" é um PWA(Progressive Web App) inspirado no Spotify usando Ruby On Rails e React.
